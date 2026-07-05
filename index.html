@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>HAETAE — Protect Your Will.</title>
+<meta name="description" content="HAETAE. 한국의 수호신 해태를 현대적으로 재해석한 스트리트 트레이닝 웨어. 불굴의 의지로 나를 지킨다." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Oswald:wght@300;400;500;600;700&family=Cinzel:wght@500;600;700&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --bg:#0a0a0b;
+    --bg-soft:#111113;
+    --panel:#141416;
+    --line:rgba(255,255,255,.10);
+    --ink:#f2efe9;
+    --muted:#8a8a8f;
+    --muted-2:#6a6a6f;
+    --red:#c8202b;
+    --red-bright:#e11d2a;
+    --red-deep:#8f1620;
+    --ease:cubic-bezier(.16,1,.3,1);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:"Oswald","Noto Sans KR",sans-serif;
+    font-weight:300;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+    line-height:1.6;
+  }
+  img{display:block;max-width:100%}
+  a{color:inherit;text-decoration:none}
+  ::selection{background:var(--red);color:#fff}
+
+  .wrap{max-width:1320px;margin:0 auto;padding:0 40px}
+  .serif{font-family:"Cinzel",serif}
+  .kr{font-family:"Noto Sans KR",sans-serif}
+  .eyebrow{
+    font-size:12px;letter-spacing:.42em;text-transform:uppercase;
+    color:var(--red);font-weight:500;
+  }
+  .reveal{opacity:0;transform:translateY(38px);transition:opacity 1s var(--ease),transform 1s var(--ease)}
+  .reveal.in{opacity:1;transform:none}
+
+  /* ---------- NAV ---------- */
+  header{
+    position:fixed;top:0;left:0;right:0;z-index:100;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:22px 40px;
+    transition:background .5s var(--ease),padding .5s var(--ease),border-color .5s;
+    border-bottom:1px solid transparent;
+  }
+  header.scrolled{
+    background:rgba(8,8,9,.82);
+    backdrop-filter:blur(14px);
+    padding:14px 40px;
+    border-bottom:1px solid var(--line);
+  }
+  .brand{display:flex;align-items:center;gap:14px}
+  .brand .word{
+    font-family:"Cinzel",serif;font-weight:600;
+    font-size:22px;letter-spacing:.34em;color:var(--ink);
+    padding-left:.34em;
+  }
+  .brand .mark{
+    width:12px;height:12px;border-radius:2px;background:var(--red);
+    box-shadow:0 0 14px rgba(200,32,43,.9);
+    animation:pulse 2.6s var(--ease) infinite;
+  }
+  @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.45;transform:scale(.82)}}
+  nav{display:flex;align-items:center;gap:42px}
+  .nav-link{
+    font-size:12.5px;letter-spacing:.28em;text-transform:uppercase;
+    color:var(--muted);font-weight:400;position:relative;padding:4px 0;
+    transition:color .35s;
+  }
+  .nav-link::after{
+    content:"";position:absolute;left:0;bottom:-2px;height:1px;width:0;background:var(--red);
+    transition:width .4s var(--ease);
+  }
+  .nav-link:hover{color:var(--ink)}
+  .nav-link:hover::after{width:100%}
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:10px;
+    font-size:12px;letter-spacing:.26em;text-transform:uppercase;font-weight:500;
+    padding:13px 26px;border:1px solid rgba(255,255,255,.6);color:var(--ink);
+    background:transparent;cursor:pointer;transition:all .4s var(--ease);
+  }
+  .btn:hover{background:var(--ink);color:#0a0a0b;border-color:var(--ink)}
+  .btn.solid{background:var(--ink);color:#0a0a0b;border-color:var(--ink)}
+  .btn.solid:hover{background:var(--red);border-color:var(--red);color:#fff}
+  .btn.red{background:var(--red);border-color:var(--red);color:#fff}
+  .btn.red:hover{background:#fff;border-color:#fff;color:#0a0a0b}
+  .nav-toggle{display:none}
+
+  /* ---------- HERO ---------- */
+  .hero{position:relative;min-height:100vh;display:flex;align-items:center;overflow:hidden}
+  .hero-bg{position:absolute;inset:0;z-index:0}
+  .hero-bg img{width:100%;height:100%;object-fit:cover;filter:grayscale(.25) contrast(1.05) brightness(.82)}
+  .hero-bg::after{
+    content:"";position:absolute;inset:0;
+    background:
+      linear-gradient(90deg,rgba(8,8,9,.92) 0%,rgba(8,8,9,.55) 42%,rgba(8,8,9,.15) 70%,rgba(8,8,9,.6) 100%),
+      linear-gradient(0deg,rgba(8,8,9,.95) 0%,rgba(8,8,9,0) 40%);
+  }
+  .hero-inner{position:relative;z-index:2;width:100%;display:flex;align-items:center;justify-content:space-between;gap:40px}
+  .hero-title{
+    font-family:"Anton",sans-serif;font-weight:400;
+    font-size:clamp(64px,12vw,168px);line-height:.9;letter-spacing:.005em;
+    text-transform:uppercase;color:var(--ink);margin:22px 0 0;
+  }
+  .hero-title span{display:block;overflow:hidden}
+  .hero-title span i{display:block;font-style:normal;transform:translateY(105%);animation:riseUp 1.1s var(--ease) forwards}
+  .hero-title span:nth-child(1) i{animation-delay:.15s}
+  .hero-title span:nth-child(2) i{animation-delay:.30s}
+  .hero-title span:nth-child(3) i{animation-delay:.45s}
+  .hero-title span:nth-child(3) i{color:var(--ink)}
+  .hero-title .dot{color:var(--red)}
+  @keyframes riseUp{to{transform:none}}
+  .hero-sub{
+    margin-top:30px;max-width:440px;color:var(--muted);
+    font-size:15px;font-weight:300;letter-spacing:.02em;line-height:1.75;
+    opacity:0;animation:fadeIn 1s var(--ease) .8s forwards;
+  }
+  .hero-sub .kr{color:#cfccc4;font-size:16px}
+  @keyframes fadeIn{to{opacity:1}}
+  .hero-cta{margin-top:38px;display:flex;gap:16px;opacity:0;animation:fadeIn 1s var(--ease) 1s forwards}
+
+  .hero-side{
+    display:flex;flex-direction:column;align-items:center;gap:34px;
+    align-self:flex-end;margin-bottom:4px;
+    opacity:0;animation:fadeIn 1.2s var(--ease) 1.1s forwards;
+  }
+  .hero-seal{
+    width:140px;height:140px;
+    display:flex;align-items:center;justify-content:center;position:relative;
+  }
+  .hero-seal img{width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 0 14px rgba(200,32,43,.55))}
+  .vslogan{writing-mode:vertical-rl;font-size:11px;letter-spacing:.5em;text-transform:uppercase;color:var(--muted-2)}
+
+  .scrollcue{
+    position:absolute;bottom:34px;left:40px;z-index:3;display:flex;align-items:center;gap:14px;
+    color:var(--muted-2);font-size:11px;letter-spacing:.32em;text-transform:uppercase;
+    opacity:0;animation:fadeIn 1s var(--ease) 1.4s forwards;
+  }
+  .scrollcue .bar{width:52px;height:1px;background:var(--muted-2);position:relative;overflow:hidden}
+  .scrollcue .bar::after{content:"";position:absolute;inset:0;background:var(--red);transform:translateX(-100%);animation:sweep 2.4s var(--ease) infinite}
+  @keyframes sweep{0%{transform:translateX(-100%)}60%,100%{transform:translateX(100%)}}
+
+  /* ---------- MARQUEE ---------- */
+  .marquee{
+    border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+    background:var(--bg-soft);overflow:hidden;padding:20px 0;white-space:nowrap;
+  }
+  .marquee .track{display:inline-flex;gap:60px;animation:scroll 26s linear infinite}
+  .marquee span{
+    font-family:"Cinzel",serif;font-size:20px;letter-spacing:.28em;text-transform:uppercase;
+    color:var(--muted);display:inline-flex;align-items:center;gap:60px;
+  }
+  .marquee span::after{content:"◆";color:var(--red);font-size:12px}
+  @keyframes scroll{to{transform:translateX(-50%)}}
+
+  /* ---------- SECTIONS ---------- */
+  section{position:relative}
+  .sec{padding:130px 0}
+  .sec-head{margin-bottom:64px;max-width:720px}
+  .sec-head h2{
+    font-family:"Anton",sans-serif;font-weight:400;text-transform:uppercase;
+    font-size:clamp(36px,5vw,66px);line-height:1;letter-spacing:.01em;margin-top:16px;
+  }
+  .sec-head p{margin-top:22px;color:var(--muted);font-size:15px;max-width:560px}
+
+  /* Philosophy */
+  .philo{background:#000;border-top:1px solid var(--line)}
+  .philo-inner{display:flex;align-items:center;justify-content:space-between;gap:56px}
+  .philo-text{flex:1 1 auto;min-width:0}
+  .philo-art{flex:0 0 auto;display:flex;justify-content:center}
+  .philo-art img{width:430px;max-width:36vw;height:auto;filter:drop-shadow(0 22px 55px rgba(0,0,0,.6))}
+  @media(max-width:900px){
+    .philo-inner{flex-direction:column;align-items:flex-start}
+    .philo-art{margin-top:28px;align-self:center}
+    .philo-art img{width:300px;max-width:72vw}
+  }
+  .philo-quote{
+    font-family:"Noto Sans KR",sans-serif;font-weight:300;
+    font-size:clamp(26px,4vw,52px);line-height:1.4;letter-spacing:-.01em;color:var(--ink);
+    max-width:900px;word-break:keep-all;
+  }
+  .philo-quote b{font-weight:700}
+  .philo-quote .en{display:block;margin-top:24px;font-family:"Oswald";font-weight:300;font-size:18px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+  .pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;margin-top:80px;background:var(--line);border:1px solid var(--line)}
+  .pillar{background:var(--bg-soft);padding:44px 38px;transition:background .5s var(--ease)}
+  .pillar:hover{background:var(--panel)}
+  .pillar .num{font-family:"Cinzel",serif;color:var(--red);font-size:14px;letter-spacing:.2em}
+  .pillar .han{font-family:"Noto Sans KR";font-weight:700;font-size:46px;margin:18px 0 6px;line-height:1}
+  .pillar h3{font-size:14px;letter-spacing:.28em;text-transform:uppercase;font-weight:500;color:var(--ink)}
+  .pillar p{margin-top:14px;color:var(--muted);font-size:14px;line-height:1.7}
+
+  /* Collection */
+  .grid-prod{display:grid;grid-template-columns:repeat(12,1fr);gap:24px}
+  .card{
+    position:relative;overflow:hidden;background:#000;border:1px solid var(--line);
+    grid-column:span 4;aspect-ratio:3/4;cursor:pointer;
+  }
+  .card.wide{grid-column:span 6;aspect-ratio:16/11}
+  .card.tall{grid-column:span 6;aspect-ratio:16/11}
+  .card img{width:100%;height:100%;object-fit:cover;transition:transform 1.1s var(--ease),filter .6s;filter:brightness(.9)}
+  .card:hover img{transform:scale(1.06);filter:brightness(1)}
+  .card .meta{
+    position:absolute;left:0;right:0;bottom:0;z-index:2;padding:26px;
+    background:linear-gradient(0deg,rgba(6,6,7,.94) 0%,rgba(6,6,7,.5) 55%,transparent 100%);
+    transform:translateY(8px);transition:transform .5s var(--ease);
+  }
+  .card:hover .meta{transform:none}
+  .card .tag{font-size:11px;letter-spacing:.26em;text-transform:uppercase;color:var(--red);font-weight:500}
+  .card .name{font-family:"Oswald";font-weight:500;font-size:22px;letter-spacing:.02em;margin-top:8px;text-transform:uppercase}
+  .card .price{color:var(--muted);font-size:13px;letter-spacing:.06em;margin-top:4px}
+  .card .plus{
+    position:absolute;top:20px;right:20px;z-index:2;width:38px;height:38px;border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;color:var(--ink);font-size:20px;font-weight:300;
+    background:rgba(10,10,11,.4);transition:all .4s var(--ease);
+  }
+  .card:hover .plus{background:var(--red);border-color:var(--red);transform:rotate(90deg)}
+
+  /* Motif story strip */
+  .motif{background:#050506;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .motif-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
+  .motif-cell{position:relative;background:#050506;overflow:hidden;aspect-ratio:3/4}
+  .motif-cell .clip{position:absolute;inset:0}
+  .motif-cell img{position:absolute;height:100%;width:500%;max-width:none;object-fit:cover;left:0;filter:grayscale(.3) contrast(1.05)}
+  .motif-cell:nth-child(1) img{left:0}
+  .motif-cell:nth-child(2) img{left:-100%}
+  .motif-cell:nth-child(3) img{left:-200%}
+  .motif-cell:nth-child(4) img{left:-300%}
+  .motif-cell:nth-child(5) img{left:-400%}
+  .motif-cell .cap{
+    position:absolute;left:0;right:0;bottom:0;padding:22px 18px;z-index:2;
+    background:linear-gradient(0deg,rgba(5,5,6,.95),transparent);
+  }
+  .motif-cell .cap .kt{font-family:"Noto Sans KR";font-weight:700;font-size:17px}
+  .motif-cell .cap .kd{color:var(--muted);font-size:12px;margin-top:6px;line-height:1.5}
+  .motif-cell::after{content:"";position:absolute;inset:0;background:rgba(200,32,43,0);transition:background .5s;z-index:1}
+  .motif-cell:hover::after{background:rgba(200,32,43,.12)}
+  .motif-figure{border:1px solid var(--line);background:#050506;overflow:hidden}
+  .motif-figure img{width:100%;height:auto;display:block;filter:contrast(1.04) brightness(1.02)}
+  .detail-figure{border:1px solid var(--line);background:#050506;overflow:hidden}
+  .detail-figure img{width:100%;height:auto;display:block}
+  .detail-note{margin-top:22px;color:var(--muted);font-size:13px;letter-spacing:.04em}
+  .detail-note b{color:var(--ink);font-weight:500}
+  .tee-gallery{display:flex;flex-direction:column;gap:22px}
+  .tee-main{border:1px solid var(--line);background:#050506;overflow:hidden}
+  .tee-main img{width:100%;height:auto;display:block}
+  .tee-row{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+  .tee-row figure{border:1px solid var(--line);background:#050506;overflow:hidden}
+  .tee-row img{width:100%;height:auto;display:block}
+  @media(max-width:700px){.tee-row{grid-template-columns:1fr}}
+  .prod-cards{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:22px}
+  .pcard{border:1px solid var(--line);background:#050506;overflow:hidden;transition:border-color .4s var(--ease)}
+  .pcard:hover{border-color:rgba(255,255,255,.24)}
+  .pcard-img{background:#000;aspect-ratio:4/3;overflow:hidden}
+  .pcard-img img{width:100%;height:100%;object-fit:contain;transition:transform 1s var(--ease)}
+  .pcard:hover .pcard-img img{transform:scale(1.04)}
+  .pcard-meta{padding:22px 26px 26px}
+  .pcard-meta .ptag{font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--red);font-weight:500}
+  .pcard-meta h3{font-family:"Oswald",sans-serif;font-weight:500;font-size:21px;text-transform:uppercase;letter-spacing:.02em;margin-top:9px}
+  .pcard-meta p{margin-top:9px;color:var(--muted);font-size:13px;letter-spacing:.02em;line-height:1.6;word-break:keep-all}
+  @media(max-width:700px){.prod-cards{grid-template-columns:1fr}}
+
+  /* The Guardian */
+  .guardian{background:#050506;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:120px 0;overflow:hidden}
+  .guardian-inner{display:flex;align-items:center;justify-content:space-between;gap:56px}
+  .guardian-copy{max-width:430px;flex:1 1 auto}
+  .guardian-copy h2{font-family:"Anton",sans-serif;font-weight:400;text-transform:uppercase;font-size:clamp(40px,6vw,84px);line-height:.95;letter-spacing:.01em;margin-top:16px}
+  .guardian-copy p:not(.eyebrow){margin-top:26px;color:#cfccc4;font-size:21px;letter-spacing:.18em;font-weight:500;text-transform:uppercase}
+  .guardian-art{flex:0 0 auto;display:flex;justify-content:center}
+  .guardian-art img{width:500px;max-width:44vw;height:auto;filter:drop-shadow(0 24px 60px rgba(0,0,0,.6))}
+  @media(max-width:900px){
+    .guardian-inner{flex-direction:column-reverse;text-align:center;gap:40px}
+    .guardian-copy{max-width:none}
+    .guardian-art img{width:340px;max-width:80vw}
+  }
+
+  /* Manifesto / story parallax */
+  .story{position:relative;min-height:90vh;display:flex;align-items:center;overflow:hidden}
+  .story-bg{position:absolute;inset:0;z-index:0}
+  .story-bg img{width:100%;height:120%;object-fit:cover;filter:grayscale(.4) brightness(.5)}
+  .story-bg::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 30% 50%,rgba(8,8,9,.4),rgba(8,8,9,.92))}
+  .story-inner{position:relative;z-index:2;max-width:780px}
+  .story-inner .big{
+    font-family:"Anton",sans-serif;text-transform:uppercase;font-size:clamp(38px,6vw,88px);
+    line-height:.98;letter-spacing:.01em;
+  }
+  .story-inner .big em{font-style:normal;color:var(--red);display:block}
+  .story-inner p{margin-top:30px;color:#c7c4bd;font-size:16px;line-height:1.9;max-width:600px;word-break:keep-all}
+  .story-inner p .kr{font-family:"Noto Sans KR";font-weight:300}
+
+  /* CTA order */
+  .cta{padding:120px 0;text-align:center;border-top:1px solid var(--line);background:var(--bg-soft);position:relative;overflow:hidden}
+  .cta .seal-ghost{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:440px;max-width:72vw;opacity:.09;filter:drop-shadow(0 0 40px rgba(200,32,43,.25))}
+  .cta-inner{position:relative;z-index:2}
+  .cta h2{font-family:"Anton";text-transform:uppercase;font-size:clamp(40px,7vw,96px);line-height:.95;letter-spacing:.01em}
+  .cta h2 em{font-style:normal;color:var(--red)}
+  .cta p{color:var(--muted);margin:24px auto 40px;max-width:480px;font-size:15px}
+
+  /* Footer */
+  footer{border-top:1px solid var(--line);padding:70px 0 40px;background:#060607}
+  .foot-top{display:flex;justify-content:space-between;gap:60px;flex-wrap:wrap;margin-bottom:56px}
+  .foot-brand{max-width:340px}
+  .foot-brand .word{font-family:"Cinzel";font-weight:600;font-size:26px;letter-spacing:.3em;padding-left:.3em}
+  .foot-brand p{color:var(--muted);font-size:13px;margin-top:18px;line-height:1.7;word-break:keep-all}
+  .foot-cols{display:flex;gap:70px;flex-wrap:wrap}
+  .foot-col h4{font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--muted-2);margin-bottom:18px}
+  .foot-col a{display:block;color:var(--muted);font-size:14px;margin-bottom:12px;transition:color .3s}
+  .foot-col a:hover{color:var(--ink)}
+  .foot-bot{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;padding-top:30px;border-top:1px solid var(--line)}
+  .foot-bot p{color:var(--muted-2);font-size:12px;letter-spacing:.08em}
+  .foot-bot .sig{font-family:"Cinzel";color:var(--muted);font-size:12px;letter-spacing:.2em}
+
+  /* ---------- Responsive ---------- */
+  @media(max-width:900px){
+    .wrap{padding:0 22px}
+    header{padding:16px 22px}
+    header.scrolled{padding:12px 22px}
+    nav{position:fixed;inset:0;background:rgba(6,6,7,.97);backdrop-filter:blur(12px);flex-direction:column;justify-content:center;gap:34px;transform:translateY(-100%);transition:transform .55s var(--ease);z-index:99}
+    nav.open{transform:none}
+    .nav-link{font-size:16px}
+    nav .btn{font-size:14px}
+    .nav-toggle{display:flex;flex-direction:column;gap:5px;z-index:101;background:none;border:none;cursor:pointer;padding:6px}
+    .nav-toggle span{width:24px;height:2px;background:var(--ink);transition:.4s var(--ease)}
+    .nav-toggle.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+    .nav-toggle.open span:nth-child(2){opacity:0}
+    .nav-toggle.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+    .hero-side{display:none}
+    .hero-bg::after{background:linear-gradient(0deg,rgba(8,8,9,.96) 6%,rgba(8,8,9,.35) 60%,rgba(8,8,9,.55) 100%)}
+    .sec{padding:80px 0}
+    .pillars{grid-template-columns:1fr}
+    .grid-prod{gap:14px}
+    .card,.card.wide,.card.tall{grid-column:span 12;aspect-ratio:4/5}
+    .motif-grid{grid-template-columns:repeat(2,1fr)}
+    .motif-cell:nth-child(5){grid-column:span 2;aspect-ratio:16/7}
+    .scrollcue{left:22px}
+  }
+  @media(max-width:560px){
+    .hero-title{font-size:clamp(54px,17vw,90px)}
+    .foot-cols{gap:40px}
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<header id="hd">
+  <a href="#top" class="brand">
+    <span class="word">HAETAE</span>
+  </a>
+  <button class="nav-toggle" id="tgl" aria-label="menu"><span></span><span></span><span></span></button>
+  <nav id="nav">
+    <a class="nav-link" href="#collection">Collection</a>
+    <a class="nav-link" href="#about">About</a>
+    <a class="nav-link" href="#story">Story</a>
+    <a class="btn solid" href="#order">Order Now</a>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="hero-bg"><img src="assets/hero.png" alt="구름 속 해태 봉우리" /></div>
+  <div class="wrap hero-inner">
+    <div class="hero-copy">
+      <p class="eyebrow" style="opacity:0;animation:fadeIn 1s var(--ease) .1s forwards">Korean Guardian · 獬豸</p>
+      <h1 class="hero-title">
+        <span><i>Protect</i></span>
+        <span><i>Your</i></span>
+        <span><i>Will</i></span>
+      </h1>
+      <p class="hero-sub">
+        <span class="kr">Strength isn't enough.</span>
+      </p>
+      <div class="hero-cta">
+        <a href="#collection" class="btn solid">Shop Now</a>
+        <a href="#story" class="btn">The Story</a>
+      </div>
+    </div>
+    <div class="hero-side">
+      <div class="hero-seal"><img src="assets/seal.png" alt="HAETAE seal" /></div>
+    </div>
+  </div>
+  <div class="scrollcue"><span class="bar"></span> Scroll</div>
+</section>
+
+<!-- PHILOSOPHY / ABOUT -->
+<section class="philo sec" id="about">
+  <div class="wrap philo-inner">
+    <div class="philo-text">
+      <div class="sec-head reveal">
+        <p class="eyebrow">Brand Essence</p>
+        <h2>Built on Will.</h2>
+      </div>
+      <p class="philo-quote reveal kr">
+        의지 위에 세운 브랜드.<br />
+        우리는 <b>자신의 의지와 신념을 끝까지 지키는</b> 사람들을 위한 옷을 만듭니다.
+        <span class="en">A brand built on will.</span>
+      </p>
+    </div>
+    <div class="philo-art reveal"><img src="assets/haetae-face.png" alt="해태 얼굴 릴리프" /></div>
+  </div>
+</section>
+
+<!-- COLLECTION -->
+<section class="sec" id="collection">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <p class="eyebrow">The Collection</p>
+      <h2>Oversized Fit<br />Training Tee</h2>
+      <p>한국의 수호신 해태를 등판 전체에 재해석한 오버핏 트레이닝 라인. 매트 실리콘 프린트 · 4WAY 스트레치 · 흡한속건 기능성 원단.</p>
+    </div>
+
+    <div class="tee-gallery reveal">
+      <div class="tee-main"><img src="assets/tee-flat.png" alt="HAETAE 오버핏 트레이닝 티 — 앞면 인장 · 뒷면 해태 릴리프" /></div>
+      <div class="tee-row">
+        <figure><img src="assets/tee-model-red.png" alt="HAETAE Tee 착용 컷 — Red Seal" /></figure>
+        <figure><img src="assets/tee-model-black.png" alt="HAETAE Tee 착용 컷 — Blackout" /></figure>
+      </div>
+    </div>
+    <div class="prod-cards reveal">
+      <article class="pcard">
+        <div class="pcard-img"><img src="assets/cap-crop.png" alt="HAETAE Training Cap" /></div>
+        <div class="pcard-meta">
+          <div class="ptag">Headwear</div>
+          <h3>Training Cap</h3>
+          <p>경량 나일론 · 레이저 펀칭 통기 · 톤온톤 인장 자수</p>
+        </div>
+      </article>
+      <article class="pcard">
+        <div class="pcard-img"><img src="assets/shorts-crop.png" alt="HAETAE Training Shorts" /></div>
+        <div class="pcard-meta">
+          <div class="ptag">Bottoms</div>
+          <h3>Training Shorts</h3>
+          <p>오버핏 · 4WAY 스트레치 · 레이저 컷 통기 · 메쉬 속팬티</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- STORY / MANIFESTO -->
+<section class="story" id="story">
+  <div class="story-bg" data-parallax><img src="assets/mist.png" alt="mist" /></div>
+  <div class="wrap story-inner reveal">
+    <p class="eyebrow">Brand Manifesto</p>
+    <h2 class="big" style="margin-top:18px">Strength fades.<em>Will remains.</em></h2>
+    <p>
+      <span class="kr">힘은 사라져도, 의지는 남는다.<br />
+      무게는 내려놓아도, 지킨 것은 남는다.<br />
+      신념을 끝까지 지키는 사람들에게.</span>
+    </p>
+    <div style="margin-top:36px"><a href="#order" class="btn">Read the Full Story</a></div>
+  </div>
+</section>
+
+<!-- THE GUARDIAN -->
+<section class="guardian">
+  <div class="wrap guardian-inner">
+    <div class="guardian-copy reveal">
+      <p class="eyebrow">해태 · 獬豸</p>
+      <h2>The<br />Guardian</h2>
+      <p>One More.</p>
+    </div>
+    <div class="guardian-art reveal"><img src="assets/haetae-body.png" alt="해태 전신 릴리프" /></div>
+  </div>
+</section>
+
+<!-- CTA / ORDER -->
+<section class="cta" id="order">
+  <img class="seal-ghost" src="assets/seal.png" alt="" aria-hidden="true" />
+  <div class="wrap cta-inner reveal">
+    <p class="eyebrow">Not for show. For the vow.</p>
+    <h2 style="margin-top:18px">Wear Your <em>Oath.</em></h2>
+    <p>지금, 당신의 의지를 입으세요. 첫 드롭은 한정 수량으로 준비됩니다.</p>
+    <a href="#" class="btn red">Order Now — 첫 드롭 예약</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="foot-top">
+      <div class="foot-brand">
+        <div class="word">HAETAE</div>
+        <p>한국의 수호신 해태를 현대적으로 재해석한<br />스트리트 트레이닝 웨어.<br />의지로 나를 지킨다.</p>
+      </div>
+      <div class="foot-cols">
+        <div class="foot-col">
+          <h4>Shop</h4>
+          <a href="#collection">Training Tee</a>
+          <a href="#collection">Black Edition</a>
+          <a href="#collection">Accessories</a>
+          <a href="#collection">Lookbook</a>
+        </div>
+        <div class="foot-col">
+          <h4>Brand</h4>
+          <a href="#about">Philosophy</a>
+          <a href="#story">Story</a>
+          <a href="#about">Haetae</a>
+        </div>
+        <div class="foot-col">
+          <h4>Follow</h4>
+          <a href="#">Instagram</a>
+          <a href="#">YouTube</a>
+          <a href="#">Newsletter</a>
+        </div>
+      </div>
+    </div>
+    <div class="foot-bot">
+      <p>© 2026 HAETAE. All rights reserved.</p>
+      <div class="sig">WEAR YOUR OATH · PROTECT YOUR WILL</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // nav scroll state
+  const hd = document.getElementById('hd');
+  const onScroll = () => hd.classList.toggle('scrolled', window.scrollY > 40);
+  window.addEventListener('scroll', onScroll, {passive:true}); onScroll();
+
+  // mobile menu
+  const tgl = document.getElementById('tgl'), nav = document.getElementById('nav');
+  tgl.addEventListener('click', () => { tgl.classList.toggle('open'); nav.classList.toggle('open'); });
+  nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { tgl.classList.remove('open'); nav.classList.remove('open'); }));
+
+  // reveal on scroll
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, {threshold:.14});
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  // light parallax on story bg
+  const px = document.querySelector('[data-parallax]');
+  if(px){
+    window.addEventListener('scroll', () => {
+      const r = px.getBoundingClientRect();
+      if(r.bottom > 0 && r.top < innerHeight){
+        const off = (r.top - innerHeight/2) * -0.06;
+        px.querySelector('img').style.transform = `translateY(${off}px)`;
+      }
+    }, {passive:true});
+  }
+</script>
+</body>
+</html>
